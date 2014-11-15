@@ -1,4 +1,4 @@
-# JSON viws
+# JSON views
 
 This app shows how you could use JSON to render views.
 
