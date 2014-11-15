@@ -1,0 +1,72 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Designs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @designs.each do |design| %>
+      <tr>
+        <td><%= design.title %></td>
+        <td><%= design.description %></td>
+        <td><%= link_to 'Show', design %></td>
+        <td><%= link_to 'Edit', edit_design_path(design) %></td>
+        <td><%= link_to 'Destroy', design, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Design', new_design_path , :id => "new-design"%>
+
+
+<div id="designform"></div>
+
+ 
+ <%=content_for :javascripts do%>
+
+
+<script type="text/javascript">
+
+  $(function(){
+
+      $('#new-design').on("click", function(event) {
+        event.preventDefault();
+        var url = $(this).attr('href');
+        $.ajax({
+          url: url,
+          beforeSend: function() {
+
+          },
+          complete: function() {
+
+          },
+          success: function(data) {
+            $('#designform').html(data['form']);
+
+          }
+        });
+      });
+
+
+     $(document).on("click", "#cancel-btn", function(event) {
+        $('form').remove();
+        //alert("s");
+     });
+
+  })
+
+
+
+</script>
+
+<%end%>
